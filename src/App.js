@@ -1,10 +1,17 @@
+import Footer from "./components/Footer";
 import Header from "./components/Header";
+import Login from "./components/Login";
+import Principal from "./components/Main";
 
 function App() {
   return (
-    <div className="App">
-      <h1>Holis</h1>
-      <Header />
+    <div>
+      <main>
+        <Header />
+        <Login />
+        <Principal />
+      </main>
+      <Footer />
     </div>
   );
 }
