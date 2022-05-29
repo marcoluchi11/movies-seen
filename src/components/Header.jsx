@@ -4,12 +4,12 @@ const Encabezado = styled.header`
   display: flex;
   justify-content: center;
   font-size: 1.1rem;
-  background-color: #e2e2e2;
+  background-color: #e1e1e1;
 `;
 const Header = () => {
   return (
     <Encabezado>
-      <h1>Armá tu lista de peliculas para ver</h1>
+      <h1>Create your own Movies list to see</h1>
     </Encabezado>
   );
 };
