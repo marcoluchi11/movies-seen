@@ -2,15 +2,23 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
+
 import reportWebVitals from "./reportWebVitals";
 import MoviesProvider from "./context/MoviesContext";
+import { Auth0Provider } from "@auth0/auth0-react";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <MoviesProvider>
-      <App />
-    </MoviesProvider>
+    <Auth0Provider
+      domain="dev-gnw5tr-c.us.auth0.com"
+      clientId="F5OIekpty37am99N7exX4llNpNAyM7Pt"
+      redirectUri={window.location.origin}
+    >
+      <MoviesProvider>
+        <App />
+      </MoviesProvider>
+    </Auth0Provider>
   </React.StrictMode>
 );
 
