@@ -1,6 +1,6 @@
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import Login from "./components/Login";
+import IsAuthenticated from "./components/IsAuthenticated";
 import Principal from "./components/Main";
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
     <div>
       <main>
         <Header />
-        <Login />
+        <IsAuthenticated />
         <Principal />
       </main>
       <Footer />
