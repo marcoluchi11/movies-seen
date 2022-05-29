@@ -1,12 +1,12 @@
 import styled from "@emotion/styled";
 
-const Pie = styled.footer`
+const Foot = styled.footer`
   display: flex;
   justify-content: center;
 `;
 const Footer = () => {
   return (
-    <Pie>
+    <Foot>
       <a
         href="https://cafecito.app/marcoluchi11"
         rel="noopener noreferrer"
@@ -18,7 +18,7 @@ const Footer = () => {
           alt="Invitame un café en cafecito.app"
         />
       </a>
-    </Pie>
+    </Foot>
   );
 };
 
