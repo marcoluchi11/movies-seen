@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-const Encabezado = styled.header`
+const Head = styled.header`
   display: flex;
   justify-content: center;
   font-size: 1.1rem;
@@ -8,9 +8,9 @@ const Encabezado = styled.header`
 `;
 const Header = () => {
   return (
-    <Encabezado>
+    <Head>
       <h1>Create your own Movies list to see</h1>
-    </Encabezado>
+    </Head>
   );
 };
 
