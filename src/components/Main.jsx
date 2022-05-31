@@ -1,7 +1,9 @@
+import MoviesFetch from "./MoviesFetch";
+
 const Principal = () => {
   return (
     <section>
-      <h1>Contenido Principal</h1>
+      <MoviesFetch />
     </section>
   );
 };
