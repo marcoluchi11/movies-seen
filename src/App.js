@@ -1,17 +1,20 @@
+import { Routes, Route } from "react-router-dom";
+import IsAuthenticated from "./components/Auth/IsAuthenticated";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import IsAuthenticated from "./components/IsAuthenticated";
-import Principal from "./components/Main";
-import Search from "./components/Search";
 
+import Main from "./components/Main";
+import UserMoviesList from "./components/UserMoviesList";
 function App() {
   return (
     <div>
       <main>
         <Header />
         <IsAuthenticated />
-        <Search />
-        <Principal />
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="list" element={<UserMoviesList />} />
+        </Routes>
       </main>
       <Footer />
     </div>
