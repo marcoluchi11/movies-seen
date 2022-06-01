@@ -1,11 +1,13 @@
 import MoviesFetch from "./MoviesFetch";
+import Search from "./Search";
 
-const Principal = () => {
+const Main = () => {
   return (
     <section>
+      <Search />
       <MoviesFetch />
     </section>
   );
 };
 
-export default Principal;
+export default Main;
