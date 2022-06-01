@@ -34,6 +34,7 @@ const Search = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     fetchData();
+    setSearch("");
   };
   return (
     <Formulary onSubmit={handleSubmit}>
