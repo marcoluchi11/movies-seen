@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
-
+import { BrowserRouter } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 import MoviesProvider from "./context/MoviesContext";
 import { Auth0Provider } from "@auth0/auth0-react";
@@ -16,7 +16,9 @@ root.render(
       redirectUri={window.location.origin}
     >
       <MoviesProvider>
-        <App />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </MoviesProvider>
     </Auth0Provider>
   </React.StrictMode>
