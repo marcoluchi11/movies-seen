@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const moviesModel = require("./models/Movies");
-const Movies = require("./models/Movies");
+
 app.use(cors());
 app.use(express.json());
 mongoose.connect(
