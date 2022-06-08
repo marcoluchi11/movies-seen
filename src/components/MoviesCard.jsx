@@ -51,19 +51,27 @@ const Container = styled.div`
   }
 `;
 const MoviesCard = ({ item }) => {
-  const { setList, list } = useContext(MoviesContext);
-  const { user } = useAuth0();
+  const { setList, list, setError, error } = useContext(MoviesContext);
+  const { user, isAuthenticated } = useAuth0();
   const handleClick = (item) => {
-    item.id = nanoid();
-    const itemDb = { ...item, mailName: user.email };
-    Axios.post("http://localhost:3001/insert", itemDb);
-    setList([...list, item]);
+    if (isAuthenticated) {
+      setError(false);
+      item.id = nanoid();
+      const itemDb = { ...item, mailName: user.email };
+      Axios.post("http://localhost:3001/insert", itemDb);
+      setList([...list, item]);
+    } else {
+      setError({
+        state: true,
+        message: "You need to login first to add to your list",
+      });
+    }
   };
   return (
     <Container>
       <h1>{item.Title}</h1>
-      <img onClick={() => handleClick(item)} src={item.Poster} alt="poster" />
-      <h2>+</h2>
+      <img src={item.Poster} alt="poster" />
+      <h2 onClick={() => handleClick(item)}>+</h2>
       <p>{item.Year}</p>
     </Container>
   );
