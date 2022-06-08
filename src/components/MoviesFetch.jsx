@@ -10,7 +10,7 @@ const Container = styled.div`
 `;
 const MoviesFetch = () => {
   const { data } = useContext(MoviesContext);
-  if (data.length === 0) return null;
+  if (data.length === 0 || typeof data === "string") return null;
   return (
     <Container>
       {data.map((item) => (
