@@ -9,7 +9,13 @@ const MoviesProvider = ({ children }) => {
     const url = `https://www.omdbapi.com/?s=${search}&apikey=89a340b7`;
     const res = await fetch(url);
     const rta = await res.json();
-    setData(rta.Search);
+    if (rta.Response === "True") {
+      setError(false);
+      setData(rta.Search);
+    } else {
+      setData(rta.Error);
+      setError(true);
+    }
   };
 
   return (
