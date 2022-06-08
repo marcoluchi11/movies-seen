@@ -2,11 +2,11 @@ import styled from "@emotion/styled";
 import { Fragment, useContext } from "react";
 import { MoviesContext } from "../context/MoviesContext";
 import Error from "./Error";
-
 const Formulary = styled.form`
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 40vh;
   input[type="text"] {
     border-radius: 4px;
     border: 0.5px solid black;
@@ -64,8 +64,14 @@ const Search = () => {
         </button>
       </Formulary>
       <ContainerError>
-        {error && (
-          <Error message={typeof data === "string" ? "Movie not found" : ""} />
+        {error.state && (
+          <Error
+            message={
+              typeof data === "string"
+                ? "Movie not found, try again"
+                : error.message
+            }
+          />
         )}
       </ContainerError>
     </Fragment>
