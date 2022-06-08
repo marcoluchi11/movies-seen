@@ -1,6 +1,9 @@
 import styled from "@emotion/styled";
 import { useContext } from "react";
 import { MoviesContext } from "../context/MoviesContext";
+import Axios from "axios";
+import { nanoid } from "nanoid";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Container = styled.div`
   display: flex;
@@ -49,7 +52,11 @@ const Container = styled.div`
 `;
 const MoviesCard = ({ item }) => {
   const { setList, list } = useContext(MoviesContext);
+  const { user } = useAuth0();
   const handleClick = (item) => {
+    item.id = nanoid();
+    const itemDb = { ...item, mailName: user.email };
+    Axios.post("http://localhost:3001/insert", itemDb);
     setList([...list, item]);
   };
   return (
