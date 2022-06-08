@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import Axios from "axios";
 import { nanoid } from "nanoid";
 import { Fragment, useContext } from "react";
 import { MoviesContext } from "../context/MoviesContext";
@@ -34,8 +35,10 @@ const Imagen = styled.img`
 `;
 const UserMoviesList = () => {
   const { list, setList } = useContext(MoviesContext);
-  const handleDelete = (elem) => {
-    setList(list.filter((item) => item.imdbID !== elem.imdbID));
+  const handleDelete = (elem, index) => {
+    const listFiltered = list.filter((item, i) => i !== index);
+    Axios.delete(`http://localhost:3001/delete/${elem.id}`);
+    setList(listFiltered);
   };
   if (list.length === 0)
     return (
@@ -47,12 +50,16 @@ const UserMoviesList = () => {
   return (
     <Fragment>
       <Container>
-        {list.map((item) => (
+        {list.map((item, index) => (
           <div key={nanoid()}>
-            <h1>{item.Title}</h1>
-            <img className="listimage" src={item.Poster} alt="" />
+            <h1>{item.Title || item.movieName}</h1>
+            <img
+              className="listimage"
+              src={item.Poster || item.movieImage}
+              alt=""
+            />
             <Imagen
-              onClick={() => handleDelete(item)}
+              onClick={() => handleDelete(item, index)}
               src="https://icongr.am/fontawesome/close.svg?size=32&color=000000
             "
               alt="close"
