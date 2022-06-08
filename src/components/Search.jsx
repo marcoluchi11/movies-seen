@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
-import { useContext } from "react";
+import { Fragment, useContext } from "react";
 import { MoviesContext } from "../context/MoviesContext";
+import Error from "./Error";
 
 const Formulary = styled.form`
   display: flex;
@@ -27,9 +28,14 @@ const Formulary = styled.form`
     align-items: center;
   }
 `;
-
+const ContainerError = styled.div`
+  display: flex;
+  place-content: center;
+  width: 100%;
+`;
 const Search = () => {
-  const { setSearch, search, fetchData } = useContext(MoviesContext);
+  const { setSearch, search, fetchData, error, data } =
+    useContext(MoviesContext);
   const handleChange = (e) => setSearch(e.target.value);
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -37,25 +43,32 @@ const Search = () => {
     setSearch("");
   };
   return (
-    <Formulary onSubmit={handleSubmit}>
-      <input
-        autoComplete="off"
-        placeholder="Search..."
-        type="text"
-        name="search"
-        id="search"
-        value={search}
-        onChange={handleChange}
-      />
-
-      <button type="submit">
-        <img
-          src={`https://icongr.am/material/magnify.svg?size=25&color=currentColor`}
-          alt="search"
+    <Fragment>
+      <Formulary onSubmit={handleSubmit}>
+        <input
+          autoComplete="off"
+          placeholder="Search..."
+          type="text"
+          name="search"
+          id="search"
+          value={search}
+          onChange={handleChange}
         />
-        Buscar
-      </button>
-    </Formulary>
+
+        <button type="submit">
+          <img
+            src={`https://icongr.am/material/magnify.svg?size=25&color=currentColor`}
+            alt="search"
+          />
+          Buscar
+        </button>
+      </Formulary>
+      <ContainerError>
+        {error && (
+          <Error message={typeof data === "string" ? "Movie not found" : ""} />
+        )}
+      </ContainerError>
+    </Fragment>
   );
 };
 
