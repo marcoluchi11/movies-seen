@@ -4,6 +4,7 @@ import { nanoid } from "nanoid";
 import { Fragment, useContext } from "react";
 import { MoviesContext } from "../context/MoviesContext";
 import BackButton from "./BackButton";
+import Spinner from "./Spinner";
 
 const Container = styled.div`
   display: flex;
@@ -33,8 +34,15 @@ const Imagen = styled.img`
     color: #fff;
   }
 `;
+const ContainerEmpty = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+  padding: 1rem;
+`;
 const UserMoviesList = () => {
-  const { list, setList } = useContext(MoviesContext);
+  const { list, setList, loading } = useContext(MoviesContext);
   const handleDelete = (elem, index) => {
     const listFiltered = list.filter((item, i) => i !== index);
     Axios.delete(`http://localhost:3001/delete/${elem.id}`);
@@ -42,10 +50,12 @@ const UserMoviesList = () => {
   };
   if (list.length === 0)
     return (
-      <div>
-        <h1>Your list is empty</h1>
+      <Fragment>
+        <ContainerEmpty>
+          {loading ? <Spinner /> : <h2>Your list is empty...</h2>}
+        </ContainerEmpty>
         <BackButton />
-      </div>
+      </Fragment>
     );
   return (
     <Fragment>
