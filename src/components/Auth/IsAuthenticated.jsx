@@ -13,19 +13,38 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  a {
+    text-decoration: none;
+    background-color: #000;
+    color: #fff;
+    margin: 1rem;
+    border: 1px solid #fff;
+    padding: 0.5rem 2rem;
+    border-radius: 5px;
+    box-shadow: 0 0 20px rgba(104, 85, 224, 0.2);
+    &:hover {
+      background-color: #fff;
+      color: #000;
+      border: 1px solid black;
+    }
+  }
 `;
 const IsAuthenticated = () => {
-  const { setList } = useContext(MoviesContext);
+  const { setList, setLoading } = useContext(MoviesContext);
   const { isAuthenticated, user } = useAuth0();
 
   useEffect(() => {
+    setLoading(true);
     if (user) {
       Axios.get("http://localhost:3001/read", {
         params: {
           user: user.email,
         },
       })
-        .then((response) => setList(response.data))
+        .then((response) => {
+          setList(response.data);
+          setLoading(false);
+        })
         .catch((err) => console.log(err));
     }
   }, [user]);
@@ -34,8 +53,10 @@ const IsAuthenticated = () => {
       {isAuthenticated ? (
         <Container>
           <Profile />
-          <Link to="list">My list</Link>
-          <Logout />
+          <div>
+            <Link to="list">My list</Link>
+            <Logout />
+          </div>
         </Container>
       ) : (
         <Login />
