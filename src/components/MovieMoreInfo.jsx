@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { Fragment, useContext, useEffect } from "react";
+import BackButton from "./BackButton";
 import { MoviesContext } from "../context/MoviesContext";
 const Container = styled.section`
   display: flex;
@@ -16,6 +17,7 @@ const Container = styled.section`
     text-align: center;
     h1 {
       font-size: 2rem;
+      letter-spacing: 0.1rem;
     }
     h4 {
       font-size: 1.2rem;
@@ -48,10 +50,12 @@ const MovieMoreInfo = () => {
           <h4>Actors: {more.item.Actors}</h4>
           <h4>Genre: {more.item.Genre}</h4>
           <h4>Seasons: {more.item.totalSeasons || "-"}</h4>
-          <h4>IMDb Rating {more.item.imdbRating}</h4>
+          <h4>IMDb Rating: {more.item.imdbRating}</h4>
         </div>
       </Container>
-      <button onClick={() => setMore(false)}>Back</button>
+
+      <BackButton />
+      <button>Add to List</button>
     </Fragment>
   );
 };
