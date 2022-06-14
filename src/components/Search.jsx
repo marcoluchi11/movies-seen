@@ -60,7 +60,7 @@ const Search = () => {
             src={`https://icongr.am/material/magnify.svg?size=25&color=currentColor`}
             alt="search"
           />
-          Buscar
+          Search
         </button>
       </Formulary>
       <ContainerError>
