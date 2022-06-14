@@ -67,7 +67,8 @@ const Container = styled.div`
   }
 `;
 const MoviesCard = ({ item }) => {
-  const { setList, list, setError, setMore } = useContext(MoviesContext);
+  const { setList, list, setError, setMore, setAdded } =
+    useContext(MoviesContext);
   const { user, isAuthenticated } = useAuth0();
   const handleClick = (item) => {
     if (isAuthenticated) {
@@ -76,6 +77,10 @@ const MoviesCard = ({ item }) => {
       const itemDb = { ...item, mailName: user.email };
       Axios.post("https://movies-seen.herokuapp.com/insert", itemDb);
       setList([...list, item]);
+      setAdded(true);
+      setTimeout(() => {
+        setAdded(false);
+      }, 2500);
     } else {
       setError({
         state: true,

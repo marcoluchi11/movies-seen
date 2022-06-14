@@ -5,6 +5,7 @@ const MoviesProvider = ({ children }) => {
   const [search, setSearch] = useState("");
   const [error, setError] = useState({ state: false, message: "" });
   const [list, setList] = useState([]);
+  const [added, setAdded] = useState(false);
   const [loading, setLoading] = useState(false);
   const [more, setMore] = useState({ state: false });
   const fetchData = async () => {
@@ -24,6 +25,8 @@ const MoviesProvider = ({ children }) => {
     <MoviesContext.Provider
       value={{
         data,
+        added,
+        setAdded,
         error,
         setSearch,
         loading,
