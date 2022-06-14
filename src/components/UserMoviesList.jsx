@@ -11,11 +11,14 @@ const Container = styled.div`
   flex-wrap: wrap;
   justify-content: center;
 
-  div {
+  .userlist {
+    text-align: center;
+
     position: relative;
     margin: 1rem;
     padding: 1rem;
     .listimage {
+      border-radius: 10px;
       width: 15rem;
       height: 15rem;
     }
@@ -61,7 +64,7 @@ const UserMoviesList = () => {
     <Fragment>
       <Container>
         {list.map((item, index) => (
-          <div key={nanoid()}>
+          <div className="userlist" key={nanoid()}>
             <h1>{item.Title || item.movieName}</h1>
             <img
               className="listimage"
