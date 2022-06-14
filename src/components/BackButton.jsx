@@ -1,33 +1,44 @@
 import styled from "@emotion/styled";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { MoviesContext } from "../context/MoviesContext";
 
 const ContainerBoton = styled.div`
   background-color: #000;
   display: flex;
   justify-content: center;
+  align-items: center;
   cursor: pointer;
   margin: 1rem 0;
-  svg {
-    padding: 0.5rem 0;
-    background-color: #000;
-    color: #fff;
+  a {
+    display: flex;
+    &&:hover {
+      text-decoration: none;
+    }
+    svg {
+      padding: 0.5rem 0;
+      background-color: #000;
+      color: #fff;
+    }
+    button {
+      border-radius: 15px;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      background-color: #000;
+      color: white;
+      border: none;
+      outline: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
   }
 `;
-const Boton = styled.button`
-  border-radius: 15px;
 
-  padding: 0.5rem 1rem;
-  background-color: #000;
-  color: white;
-  border: none;
-  outline: none;
-  font-size: 2rem;
-  cursor: pointer;
-`;
 const BackButton = () => {
+  const { setMore } = useContext(MoviesContext);
   return (
-    <Link to="/">
-      <ContainerBoton>
+    <ContainerBoton onClick={() => setMore({ state: false })}>
+      <Link to="/">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="icon icon-tabler icon-tabler-arrow-back"
@@ -43,9 +54,9 @@ const BackButton = () => {
           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
           <path d="M9 11l-4 4l4 4m-4 -4h11a4 4 0 0 0 0 -8h-1" />
         </svg>
-        <Boton>Back</Boton>
-      </ContainerBoton>{" "}
-    </Link>
+        <button>Back</button>
+      </Link>
+    </ContainerBoton>
   );
 };
 
