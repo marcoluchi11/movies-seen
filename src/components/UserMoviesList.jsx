@@ -45,7 +45,7 @@ const UserMoviesList = () => {
   const { list, setList, loading } = useContext(MoviesContext);
   const handleDelete = (elem, index) => {
     const listFiltered = list.filter((item, i) => i !== index);
-    Axios.delete(`http://localhost:3001/delete/${elem.id}`);
+    Axios.delete(`https://movies-seen.herokuapp.com/delete/${elem.id}`);
     setList(listFiltered);
   };
   if (list.length === 0)
