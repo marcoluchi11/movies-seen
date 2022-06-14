@@ -4,7 +4,6 @@ import { MoviesContext } from "../context/MoviesContext";
 import Axios from "axios";
 import { nanoid } from "nanoid";
 import { useAuth0 } from "@auth0/auth0-react";
-import MovieMoreInfo from "./MovieMoreInfo";
 
 const Container = styled.div`
   display: flex;
@@ -68,7 +67,7 @@ const Container = styled.div`
   }
 `;
 const MoviesCard = ({ item }) => {
-  const { setList, list, setError, setMore, more } = useContext(MoviesContext);
+  const { setList, list, setError, setMore } = useContext(MoviesContext);
   const { user, isAuthenticated } = useAuth0();
   const handleClick = (item) => {
     if (isAuthenticated) {
