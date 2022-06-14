@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { nanoid } from "nanoid";
 import { useContext } from "react";
 import { MoviesContext } from "../context/MoviesContext";
+import MovieMoreInfo from "./MovieMoreInfo";
 import MoviesCard from "./MoviesCard";
 const Container = styled.div`
   display: flex;
@@ -10,13 +11,15 @@ const Container = styled.div`
   justify-content: center;
 `;
 const MoviesFetch = () => {
-  const { data } = useContext(MoviesContext);
+  const { data, more } = useContext(MoviesContext);
   if (data.length === 0 || typeof data === "string") return null;
   return (
     <Container>
-      {data.map((item) => (
-        <MoviesCard key={nanoid()} item={item} />
-      ))}
+      {more.state ? (
+        <MovieMoreInfo />
+      ) : (
+        data.map((item) => <MoviesCard key={nanoid()} item={item} />)
+      )}
     </Container>
   );
 };
