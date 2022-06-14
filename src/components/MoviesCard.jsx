@@ -4,6 +4,7 @@ import { MoviesContext } from "../context/MoviesContext";
 import Axios from "axios";
 import { nanoid } from "nanoid";
 import { useAuth0 } from "@auth0/auth0-react";
+import MovieMoreInfo from "./MovieMoreInfo";
 
 const Container = styled.div`
   display: flex;
@@ -19,6 +20,9 @@ const Container = styled.div`
   &&:hover {
     background-color: #000;
     color: #fff;
+    img {
+      opacity: 0.5;
+    }
   }
   img {
     width: 20rem;
@@ -29,7 +33,7 @@ const Container = styled.div`
   h1 {
     text-align: center;
   }
-  p {
+  p.year {
     position: absolute;
     bottom: 1rem;
     right: 1rem;
@@ -39,10 +43,23 @@ const Container = styled.div`
     background-color: #007aff;
     color: #fff;
   }
+
+  p#moreinfo {
+    cursor: pointer;
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    font-size: 0.75rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 1rem;
+    background-color: #007aff;
+    color: #fff;
+  }
   h2 {
     position: absolute;
     top: 5rem;
     right: 2rem;
+    width: auto;
     padding: 0.3rem 0.7rem;
     background-color: lime;
     border-radius: 25px;
@@ -51,14 +68,14 @@ const Container = styled.div`
   }
 `;
 const MoviesCard = ({ item }) => {
-  const { setList, list, setError, error } = useContext(MoviesContext);
+  const { setList, list, setError, setMore, more } = useContext(MoviesContext);
   const { user, isAuthenticated } = useAuth0();
   const handleClick = (item) => {
     if (isAuthenticated) {
       setError(false);
       item.id = nanoid();
       const itemDb = { ...item, mailName: user.email };
-      Axios.post("http://localhost:3001/insert", itemDb);
+      Axios.post("https://movies-seen.herokuapp.com/insert", itemDb);
       setList([...list, item]);
     } else {
       setError({
@@ -67,12 +84,18 @@ const MoviesCard = ({ item }) => {
       });
     }
   };
+  const handleInfo = () => {
+    setMore({ state: true, item });
+  };
   return (
     <Container>
       <h1>{item.Title}</h1>
       <img src={item.Poster} alt="poster" />
       <h2 onClick={() => handleClick(item)}>+</h2>
-      <p>{item.Year}</p>
+      <p className="year">{item.Year}</p>
+      <p onClick={() => handleInfo(item)} id="moreinfo">
+        More info...
+      </p>
     </Container>
   );
 };
