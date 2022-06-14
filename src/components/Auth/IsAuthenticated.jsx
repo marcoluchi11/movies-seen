@@ -36,7 +36,7 @@ const IsAuthenticated = () => {
   useEffect(() => {
     setLoading(true);
     if (user) {
-      Axios.get("http://localhost:3001/read", {
+      Axios.get("https://movies-seen.herokuapp.com/read", {
         params: {
           user: user.email,
         },
@@ -47,7 +47,7 @@ const IsAuthenticated = () => {
         })
         .catch((err) => console.log(err));
     }
-  }, [user]);
+  }, [user, setList, setLoading]);
   return (
     <Container>
       {isAuthenticated ? (
