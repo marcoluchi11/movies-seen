@@ -6,6 +6,7 @@ const MoviesProvider = ({ children }) => {
   const [error, setError] = useState({ state: false, message: "" });
   const [list, setList] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [more, setMore] = useState({ state: false });
   const fetchData = async () => {
     const url = `https://www.omdbapi.com/?s=${search}&apikey=89a340b7`;
     const res = await fetch(url);
@@ -30,6 +31,8 @@ const MoviesProvider = ({ children }) => {
         search,
         fetchData,
         setError,
+        setMore,
+        more,
         setList,
         list,
       }}
