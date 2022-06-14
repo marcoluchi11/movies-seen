@@ -8,7 +8,7 @@ const moviesModel = require("./models/Movies");
 app.use(cors());
 app.use(express.json());
 mongoose.connect(
-  `mongodb+srv://marcoluchi11:eduardo11@movies-seen.vmoqv.mongodb.net/?retryWrites=true&w=majority`,
+  `mongodb+srv://marcoluchi11:${process.env.MONGO_PASSWORD}}@movies-seen.vmoqv.mongodb.net/?retryWrites=true&w=majority`,
 
   {
     useNewUrlParser: true,
