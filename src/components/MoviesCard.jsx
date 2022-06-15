@@ -67,20 +67,28 @@ const Container = styled.div`
   }
 `;
 const MoviesCard = ({ item }) => {
-  const { setList, list, setError, setMore, setAdded } =
+  const { setList, list, setError, setMore, setAdded, error } =
     useContext(MoviesContext);
   const { user, isAuthenticated } = useAuth0();
   const handleClick = (item) => {
     if (isAuthenticated) {
-      setError(false);
-      item.id = nanoid();
-      const itemDb = { ...item, mailName: user.email };
-      Axios.post("https://movies-seen.herokuapp.com/insert", itemDb);
-      setList([...list, item]);
-      setAdded(true);
-      setTimeout(() => {
-        setAdded(false);
-      }, 2500);
+      const repeatMovie = list.findIndex(
+        (elem) => elem.imdbID || elem.movieId === item.imdbID
+      );
+      if (repeatMovie === -1) {
+        setError(false);
+        item.id = nanoid();
+        const itemDb = { ...item, mailName: user.email };
+        Axios.post("https://movies-seen.herokuapp.com/insert", itemDb);
+        setList([...list, item]);
+        setAdded(true);
+        setTimeout(() => {
+          setAdded(false);
+        }, 2500);
+      } else {
+        setError({ state: true, message: "You cannot add a movie twice" });
+        return;
+      }
     } else {
       setError({
         state: true,
@@ -89,6 +97,7 @@ const MoviesCard = ({ item }) => {
     }
   };
   const handleInfo = () => {
+    setError({ ...error, state: false });
     setMore({ state: true, item });
   };
   return (
