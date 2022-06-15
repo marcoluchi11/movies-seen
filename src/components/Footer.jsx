@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 const Foot = styled.footer`
   display: flex;
   justify-content: center;
+  margin-top: 7rem;
 `;
 const Footer = () => {
   return (
