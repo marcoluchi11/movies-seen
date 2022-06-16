@@ -1,10 +1,9 @@
 import styled from "@emotion/styled";
-
 const Container = styled.div`
   position: fixed;
   right: 1%;
   top: 90%;
-  background-color: lime;
+  background-color: limegreen;
   padding: 0.5rem;
   border-radius: 15px;
   h4 {
