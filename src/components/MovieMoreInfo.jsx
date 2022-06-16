@@ -3,20 +3,39 @@ import { Fragment, useContext, useEffect } from "react";
 import BackButton from "./BackButton";
 import { MoviesContext } from "../context/MoviesContext";
 import { useAuth0 } from "@auth0/auth0-react";
-
 import Axios from "axios";
 import AddedButton from "./AddedButton";
 import { nanoid } from "nanoid";
+import Error from "./Error";
 const Container = styled.section`
   display: flex;
   justify-content: center;
+  margin-top: 4rem;
   @media (max-width: 700px) {
     flex-direction: column;
+  }
+  ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    .rating {
+      background-color: gold;
+      padding: 0 0.4rem;
+      border-radius: 5px;
+    }
+    li {
+      font-weight: 400;
+      margin-right: 0.5rem;
+    }
   }
   .image {
     display: flex;
     justify-content: center;
     align-items: center;
+    img {
+      border-radius: 15px;
+      margin: 1rem;
+    }
   }
   .info {
     text-align: center;
@@ -43,7 +62,7 @@ const AddButton = styled.button`
   cursor: pointer;
 `;
 const MovieMoreInfo = () => {
-  const { setMore, more, setList, setError, setAdded, list, added } =
+  const { setMore, more, setList, setError, setAdded, list, added, error } =
     useContext(MoviesContext);
   const { isAuthenticated, user } = useAuth0();
   const handleClick = () => {
@@ -92,18 +111,25 @@ const MovieMoreInfo = () => {
         </div>
         <div className="info">
           <h1>{more.item.Title}</h1>
-          <h4>Description: {more.item.Plot}</h4>
+          <ul>
+            <li>{more.item.Year}</li>
+
+            <li> {more.item.Genre}</li>
+          </ul>
+          <ul>
+            <li>Seasons: {more.item.totalSeasons || "-"}</li>
+            <li className="rating">IMDb Rating: {more.item.imdbRating}</li>
+          </ul>
+          <h3>Description: {more.item.Plot}</h3>
+          <h5>Actors: {more.item.Actors}</h5>
           <hr />
-          <h4>Year: {more.item.Year}</h4>
-          <h4>Actors: {more.item.Actors}</h4>
-          <h4>Genre: {more.item.Genre}</h4>
-          <h4>Seasons: {more.item.totalSeasons || "-"}</h4>
-          <h4>IMDb Rating: {more.item.imdbRating}</h4>
+
           <BackButton />
           <AddButton className="add" onClick={handleClick}>
-            +Add to List
+            +Add to Watchlist
           </AddButton>
           {added && <AddedButton />}
+          {error && <Error message={error.message} />}
         </div>
       </Container>
     </Fragment>
