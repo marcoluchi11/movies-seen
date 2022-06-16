@@ -103,6 +103,9 @@ const MoviesCard = ({ item }) => {
         state: true,
         message: "You need to login first to add to your list",
       });
+      setTimeout(() => {
+        setError({ ...error, state: false });
+      }, 2500);
     }
   };
   const handleInfo = () => {
