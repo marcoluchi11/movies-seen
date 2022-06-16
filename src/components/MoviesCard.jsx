@@ -11,7 +11,9 @@ const Container = styled.div`
   margin: 1rem;
   padding: 1rem;
   width: 25%;
-
+  @media (max-width: 920px) {
+    width: 50%;
+  }
   transition: 0.5s background-color ease;
   transition: 0.5s color ease;
   border-radius: 5px;
@@ -43,6 +45,7 @@ const Container = styled.div`
   }
 
   h1 {
+    font-weight: 400;
     text-align: center;
   }
   p.year {

@@ -10,23 +10,34 @@ const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-
+  @media (max-width: 700px) {
+    flex-direction: column;
+    align-items: center;
+  }
+  h1 {
+    font-weight: 400;
+    padding: 0;
+    margin: 1rem;
+    font-size: 1rem;
+  }
   .userlist {
     text-align: center;
-
-    position: relative;
     margin: 1rem;
     padding: 1rem;
-    .listimage {
-      border-radius: 10px;
-      width: 15rem;
-      height: 15rem;
+
+    div {
+      position: relative;
+      .listimage {
+        border-radius: 10px;
+        width: 15rem;
+        height: 15rem;
+      }
     }
   }
 `;
 const Imagen = styled.img`
   position: absolute;
-  top: 7rem;
+  top: 1rem;
   right: 1rem;
   background-color: #fff;
   border-radius: 50%;
@@ -47,6 +58,7 @@ const ContainerEmpty = styled.div`
 const UserMoviesList = () => {
   const { list, setList, loading } = useContext(MoviesContext);
   const handleDelete = (elem, index) => {
+    window.confirm(`Are you sure you want to delete ${elem.Title}`);
     const listFiltered = list.filter((item, i) => i !== index);
     Axios.delete(`https://movies-seen.herokuapp.com/delete/${elem.id}`);
     setList(listFiltered);
@@ -66,17 +78,19 @@ const UserMoviesList = () => {
         {list.map((item, index) => (
           <div className="userlist" key={nanoid()}>
             <h1>{item.Title || item.movieName}</h1>
-            <img
-              className="listimage"
-              src={item.Poster || item.movieImage}
-              alt=""
-            />
-            <Imagen
-              onClick={() => handleDelete(item, index)}
-              src="https://icongr.am/fontawesome/close.svg?size=32&color=000000
+            <div>
+              <img
+                className="listimage"
+                src={item.Poster || item.movieImage}
+                alt="img"
+              />
+              <Imagen
+                onClick={() => handleDelete(item, index)}
+                src="https://icongr.am/fontawesome/close.svg?size=32&color=000000
             "
-              alt="close"
-            />
+                alt="close"
+              />
+            </div>
           </div>
         ))}
       </Container>

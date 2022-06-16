@@ -40,6 +40,7 @@ const Container = styled.section`
   .info {
     text-align: center;
     h1 {
+      font-weight: 400;
       font-size: 2rem;
       letter-spacing: 0.1rem;
     }
@@ -82,6 +83,9 @@ const MovieMoreInfo = () => {
         }, 2500);
       } else {
         setError({ state: true, message: "You cannot add a movie twice" });
+        setTimeout(() => {
+          setError({ state: false, message: "" });
+        }, 2500);
         return;
       }
     } else {
@@ -129,7 +133,7 @@ const MovieMoreInfo = () => {
             +Add to Watchlist
           </AddButton>
           {added && <AddedButton />}
-          {error && <Error message={error.message} />}
+          {error.state && <Error message={error.message} />}
         </div>
       </Container>
     </Fragment>

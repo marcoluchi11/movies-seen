@@ -10,6 +10,7 @@ const Container = styled.div`
   padding: 0.5rem;
   border-radius: 15px;
   h4 {
+    font-weight: 700;
     margin: 0;
     padding: 0;
   }
