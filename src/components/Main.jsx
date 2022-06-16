@@ -1,4 +1,6 @@
 import styled from "@emotion/styled";
+import { useContext } from "react";
+import { MoviesContext } from "../context/MoviesContext";
 import MoviesFetch from "./MoviesFetch";
 import Search from "./Search";
 
@@ -11,9 +13,11 @@ const Container = styled.section`
   }
 `;
 const Main = () => {
+  const { more } = useContext(MoviesContext);
   return (
     <Container>
-      <Search />
+      {more.state === false ? <Search /> : null}
+
       <MoviesFetch />
     </Container>
   );
