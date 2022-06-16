@@ -11,24 +11,37 @@ const Container = styled.div`
   margin: 1rem;
   padding: 1rem;
   width: 25%;
-  position: relative;
+
   transition: 0.5s background-color ease;
   transition: 0.5s color ease;
   border-radius: 5px;
 
   &&:hover {
-    background-color: #000;
-    color: #fff;
+    color: #b2b2b2;
     img {
       opacity: 0.5;
     }
   }
-  img {
-    width: 20rem;
-    height: 20rem;
-    border-radius: 1rem;
-    width: 100%;
+  div {
+    position: relative;
+    img {
+      width: 20rem;
+      height: 20rem;
+      border-radius: 1rem;
+      width: 100%;
+    }
+    p.add {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.3rem 0.7rem;
+      border-radius: 15px;
+      background-color: limegreen;
+
+      cursor: pointer;
+    }
   }
+
   h1 {
     text-align: center;
   }
@@ -54,17 +67,6 @@ const Container = styled.div`
     background-color: #007aff;
     color: #fff;
   }
-  h2 {
-    position: absolute;
-    top: 5rem;
-    right: 2rem;
-    width: auto;
-    padding: 0.3rem 0.7rem;
-    background-color: lime;
-    border-radius: 25px;
-    font-size: 1.9rem;
-    cursor: pointer;
-  }
 `;
 const MoviesCard = ({ item }) => {
   const { setList, list, setError, setMore, setAdded, error } =
@@ -72,11 +74,12 @@ const MoviesCard = ({ item }) => {
   const { user, isAuthenticated } = useAuth0();
   const handleClick = (item) => {
     if (isAuthenticated) {
-      const repeatMovie = list.findIndex(
-        (elem) => elem.imdbID || elem.movieId === item.imdbID
-      );
+      const repeatMovie = list.findIndex((elem, index) => {
+        return (elem.imdbID || elem.movieId) === item.imdbID;
+      });
+      console.log(repeatMovie);
       if (repeatMovie === -1) {
-        setError(false);
+        setError({ ...error, state: false });
         item.id = nanoid();
         const itemDb = { ...item, mailName: user.email };
         Axios.post("https://movies-seen.herokuapp.com/insert", itemDb);
@@ -87,6 +90,9 @@ const MoviesCard = ({ item }) => {
         }, 2500);
       } else {
         setError({ state: true, message: "You cannot add a movie twice" });
+        setTimeout(() => {
+          setError({ state: false, message: "" });
+        }, 2500);
         return;
       }
     } else {
@@ -103,12 +109,16 @@ const MoviesCard = ({ item }) => {
   return (
     <Container>
       <h1>{item.Title}</h1>
-      <img src={item.Poster} alt="poster" />
-      <h2 onClick={() => handleClick(item)}>+</h2>
-      <p className="year">{item.Year}</p>
-      <p onClick={() => handleInfo(item)} id="moreinfo">
-        More info...
-      </p>
+      <div>
+        <img src={item.Poster} alt="poster" />
+        <p className="add" onClick={() => handleClick(item)}>
+          +Add to Watchlist
+        </p>
+        <p className="year">{item.Year}</p>
+        <p onClick={() => handleInfo(item)} id="moreinfo">
+          More info...
+        </p>
+      </div>
     </Container>
   );
 };
