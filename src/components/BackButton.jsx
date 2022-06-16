@@ -9,13 +9,16 @@ const ContainerBoton = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  margin: 1rem 0;
+  border-radius: 10px;
   a {
     display: flex;
+    justify-content: center;
+    align-items: center;
     &&:hover {
       text-decoration: none;
     }
     svg {
+      border-radius: 10px;
       padding: 0.5rem 0;
       background-color: #000;
       color: #fff;
