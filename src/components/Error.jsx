@@ -1,21 +1,24 @@
 import styled from "@emotion/styled";
 
 const Container = styled.div`
-  display: flex;
-  padding: 0.2rem 2rem;
-  margin: 1rem;
+  position: fixed;
+  right: 1%;
+  z-index: 90;
+  top: 90%;
+  background-color: #a42923;
   color: #fff;
-  border-radius: 5px;
-  background-color: #a10221;
-  p {
-    text-align: center;
+  padding: 0.5rem;
+  border-radius: 15px;
+  h4 {
+    margin: 0;
+    padding: 0;
   }
 `;
 
 const Error = ({ message }) => {
   return (
     <Container>
-      <p>{message}</p>
+      <h4>{message}</h4>
     </Container>
   );
 };
