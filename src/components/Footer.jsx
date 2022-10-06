@@ -2,8 +2,11 @@ import styled from "@emotion/styled";
 
 const Foot = styled.footer`
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   margin-top: 7rem;
+  font-weight: 300;
 `;
 const Footer = () => {
   return (
@@ -19,6 +22,7 @@ const Footer = () => {
           alt="Invitame un café en cafecito.app"
         />
       </a>
+      <small>2022 &#169; Todos los derechos reservados</small>
     </Foot>
   );
 };
