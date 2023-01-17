@@ -60,7 +60,7 @@ const UserMoviesList = () => {
   const handleDelete = (elem, index) => {
     window.confirm(`Are you sure you want to delete ${elem.Title}`);
     const listFiltered = list.filter((item, i) => i !== index);
-    Axios.delete(`https://movies-seen.herokuapp.com/delete/${elem.id}`);
+    Axios.delete(`https://movies-seen.fly.dev/delete/${elem.id}`);
     setList(listFiltered);
   };
   if (list.length === 0)

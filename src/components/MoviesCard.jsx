@@ -85,7 +85,7 @@ const MoviesCard = ({ item }) => {
         setError({ ...error, state: false });
         item.id = nanoid();
         const itemDb = { ...item, mailName: user.email };
-        Axios.post("https://movies-seen.herokuapp.com/insert", itemDb);
+        Axios.post("https://movies-seen.fly.dev/insert", itemDb);
         setList([...list, item]);
         setAdded(true);
         setTimeout(() => {
